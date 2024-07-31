@@ -4,7 +4,7 @@ import json
 import voluptuous as vol
 
 from homeassistant.components.switch import SwitchEntity
-from homeassistant.const import CONF_MAC, CONF_NAME, CONF_API_KEY, CONF_PHONE
+from homeassistant.const import CONF_MAC, CONF_API_KEY, CONF_PHONE
 import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)

@@ -5,6 +5,5 @@
     "documentation": "https://github.com/Seele0oO/ha_hipc_control",
     "requirements": ["requests"],
     "dependencies": [],
-    "codeowners": ["@Seele0oO"],
-    "config_flow": true
+    "codeowners": ["@Seele0oO"]
 }

@@ -4,12 +4,10 @@ import json
 import voluptuous as vol
 
 from homeassistant.components.button import ButtonEntity
-from homeassistant.const import CONF_MAC, CONF_NAME, CONF_API_KEY, CONF_PHONE
+from homeassistant.const import CONF_MAC, CONF_API_KEY, CONF_PHONE
 import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
-
-CONF_REBOOT = "reboot"
 
 BUTTON_SCHEMA = vol.Schema({
     vol.Required(CONF_PHONE): cv.string,
