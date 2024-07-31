@@ -3,15 +3,12 @@ import json
 import logging
 
 from homeassistant.components.switch import SwitchEntity
+from .const import DOMAIN, CONF_PHONE, CONF_USER_KEY, CONF_MAC
 
 _LOGGER = logging.getLogger(__name__)
 
-CONF_PHONE = "phone"
-CONF_USER_KEY = "user_key"
-CONF_MAC = "mac"
-
 def setup_platform(hass, config, add_entities, discovery_info=None):
-    data = hass.data["hipc_control"]
+    data = hass.data[DOMAIN]
     phone = data[CONF_PHONE]
     user_key = data[CONF_USER_KEY]
     mac = data[CONF_MAC]

@@ -1,0 +1,25 @@
+{
+"config": {
+    "step": {
+    "user": {
+        "title": "Configure HiPC Control",
+        "description": "Please enter your HiPC Control configuration.",
+        "data": {
+        "phone": "Phone",
+        "user_key": "User Key",
+        "mac": "MAC Address"
+        }
+    }
+    },
+    "error": {
+    "invalid_auth": "Invalid authentication"
+    }
+},
+"options": {
+    "step": {
+    "init": {
+        "title": "Adjust your settings"
+    }
+    }
+}
+}

@@ -1,7 +1,6 @@
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
-
 from .const import DOMAIN, CONF_PHONE, CONF_USER_KEY, CONF_MAC
 
 @callback
