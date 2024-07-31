@@ -3,22 +3,24 @@ import requests
 import json
 import voluptuous as vol
 
-from homeassistant.components.switch import SwitchEntity
+from homeassistant.components.switch import PLATFORM_SCHEMA, SwitchEntity
 from homeassistant.const import CONF_MAC, CONF_PHONE, CONF_API_KEY
 import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 
-SWITCH_SCHEMA = vol.Schema({
+PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_PHONE): cv.string,
     vol.Required(CONF_API_KEY): cv.string,
     vol.Required(CONF_MAC): cv.string,
 })
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
+    _LOGGER.info("Setting up HiPC Power Switch platform")
     phone = config.get(CONF_PHONE)
     api_key = config.get(CONF_API_KEY)
     mac = config.get(CONF_MAC)
+    _LOGGER.info(f"Phone: {phone}, API Key: {api_key}, MAC: {mac}")
     add_entities([HiPCSwitch(phone, api_key, mac)])
 
 class HiPCSwitch(SwitchEntity):
@@ -28,6 +30,7 @@ class HiPCSwitch(SwitchEntity):
         self._api_key = api_key
         self._mac = mac
         self._state = False
+        _LOGGER.info("HiPCSwitch initialized")
 
     @property
     def name(self):
@@ -38,10 +41,12 @@ class HiPCSwitch(SwitchEntity):
         return self._state
 
     def turn_on(self, **kwargs):
+        _LOGGER.info("Turning on HiPC Power Switch")
         self._send_request("1")
         self._state = True
 
     def turn_off(self, **kwargs):
+        _LOGGER.info("Turning off HiPC Power Switch")
         self._send_request("0")
         self._state = False
 
@@ -53,8 +58,9 @@ class HiPCSwitch(SwitchEntity):
             "mac": self._mac,
             "switch": switch_state
         }
+        _LOGGER.info(f"Sending request: {data}")
         response = requests.post(url, data=json.dumps(data))
         if response.status_code == 200:
-            _LOGGER.info("Request successful: %s", response.text)
+            _LOGGER.info(f"Request successful: {response.text}")
         else:
-            _LOGGER.error("Request failed: %s", response.text)
+            _LOGGER.error(f"Request failed: {response.text}")
