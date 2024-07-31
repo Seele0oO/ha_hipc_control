@@ -4,7 +4,7 @@ import json
 import voluptuous as vol
 
 from homeassistant.components.button import ButtonEntity
-from homeassistant.const import CONF_MAC, CONF_API_KEY, CONF_PHONE
+from homeassistant.const import CONF_MAC, CONF_PHONE, CONF_API_KEY
 import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
@@ -16,9 +16,9 @@ BUTTON_SCHEMA = vol.Schema({
 })
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
-    phone = config[CONF_PHONE]
-    api_key = config[CONF_API_KEY]
-    mac = config[CONF_MAC]
+    phone = config.get(CONF_PHONE)
+    api_key = config.get(CONF_API_KEY)
+    mac = config.get(CONF_MAC)
     add_entities([HiPCRebootButton(phone, api_key, mac)])
 
 class HiPCRebootButton(ButtonEntity):
