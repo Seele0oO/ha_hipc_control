@@ -3,7 +3,7 @@
     "name": "HiPC Control",
     "version": "0.0.2",
     "documentation": "https://github.com/Seele0oO/ha_hipc_control",
-    "requirements": [],
+    "requirements": ["requests"],
     "dependencies": [],
     "codeowners": ["@Seele0oO"],
     "config_flow": true
