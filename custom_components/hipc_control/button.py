@@ -1,7 +1,7 @@
 import requests
 import logging
 
-from homeassistant.components.switch import SwitchEntity
+from homeassistant.components.button import ButtonEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
@@ -14,32 +14,20 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     user_key = entry.data[CONF_USER_KEY]
     mac = entry.data[CONF_MAC]
 
-    async_add_entities([HiPCSwitch(phone, user_key, mac)])
+    async_add_entities([HiPCButton(phone, user_key, mac)])
 
-class HiPCSwitch(SwitchEntity):
+class HiPCButton(ButtonEntity):
     def __init__(self, phone, user_key, mac):
         self._phone = phone
         self._user_key = user_key
         self._mac = mac
-        self._state = False
 
     @property
     def name(self):
-        return "HiPC Switch"
+        return "HiPC Restart Button"
 
-    @property
-    def is_on(self):
-        return self._state
-
-    def turn_on(self, **kwargs):
-        self._send_request("1")
-        self._state = True
-        self.schedule_update_ha_state()
-
-    def turn_off(self, **kwargs):
-        self._send_request("0")
-        self._state = False
-        self.schedule_update_ha_state()
+    def press(self):
+        self._send_request("2")
 
     def _send_request(self, switch_state):
         url = "https://kjkapi.hipcapi.com/api/openapi/console"
