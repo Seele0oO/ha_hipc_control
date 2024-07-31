@@ -1,0 +1,6 @@
+restart_pc:
+  description: "Restart the PC"
+  fields:
+    entity_id:
+      description: "Entity ID of the switch"
+      example: "switch.hipc_switch"

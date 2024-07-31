@@ -1,0 +1,10 @@
+{
+    "domain": "hipc_control",
+    "name": "HiPC Control",
+    "version": "0.0.1",
+    "documentation": "https://github.com/Seele0oO/ha_hipc_control",
+    "requirements": [],
+    "dependencies": [],
+    "codeowners": ["@Seele0oO"],
+    "config_flow": true
+} 
